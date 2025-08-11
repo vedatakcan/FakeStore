@@ -1,7 +1,5 @@
 package com.vedatakcan.fakestore.domain.models
 
-import android.media.Rating
-
 data class Product(
     val id: Int,
     val title: String,

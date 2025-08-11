@@ -1,7 +1,8 @@
 package com.vedatakcan.fakestore.data.models
 
-import android.media.Rating
+
 import com.google.gson.annotations.SerializedName
+import com.vedatakcan.fakestore.domain.models.Rating
 
 
 data class ProductDto(

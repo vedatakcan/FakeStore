@@ -14,7 +14,7 @@ interface CartDao {
 
     // Sepetlerdeki ürünleri getiren sorgu
     @Query("SELECT * FROM cart_items")
-    fun getAllCartItems(): Flow <List<CartItemEntity>>
+    fun getAllCartItems(): Flow<List<CartItemEntity>>
 
     // Sepete yerin ürün ekleyen veya var olanı günneleyen metod
     @Insert(onConflict = OnConflictStrategy.REPLACE)
