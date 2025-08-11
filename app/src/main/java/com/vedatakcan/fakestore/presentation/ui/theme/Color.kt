@@ -1,4 +1,4 @@
-package com.vedatakcan.fakestore.ui.theme
+package com.vedatakcan.fakestore.presentation.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

@@ -11,7 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.vedatakcan.fakestore.ui.theme.FakeStoreTheme
+import com.vedatakcan.fakestore.presentation.ui.theme.FakeStoreTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
