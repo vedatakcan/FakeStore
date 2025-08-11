@@ -19,5 +19,5 @@ data class ProductDto(
     @SerializedName("image")
     val image: String,
     @SerializedName("rating")
-    val rating: Rating,
+    val rating: RatingDto,
 )
