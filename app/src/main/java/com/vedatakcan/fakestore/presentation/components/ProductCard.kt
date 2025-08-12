@@ -44,13 +44,13 @@ fun ProductCard(
             AsyncImage(
                 model =  product.imageUrl,
                 contentDescription = product.title,
-                contentScale = ContentScale.Crop,
+                contentScale = ContentScale.Fit,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(200.dp)
+                    .height(100.dp)
             )
 
-            Spacer(modifier = Modifier.padding(8.dp))
+            Spacer(modifier = Modifier.height(8.dp))
 
             Text(
                 text = product.title,
@@ -58,7 +58,7 @@ fun ProductCard(
                 maxLines = 2,
                 overflow = TextOverflow.Ellipsis
             )
-            Spacer(modifier = Modifier.padding(8.dp))
+            Spacer(modifier = Modifier.height(8.dp))
 
             Text(
                 text = "${product.price}",
