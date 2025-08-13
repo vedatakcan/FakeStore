@@ -9,6 +9,10 @@ fun Product.toCartItemEntity(): CartItemEntity {
         title = this.title,
         price = this.price,
         imageUrl = this.imageUrl,
+        description = this.description,
+        category = this.category,
+        ratingCount = this.rating.count,
+        ratingRate = this.rating.rate,
         quantity = 1
     )
 }

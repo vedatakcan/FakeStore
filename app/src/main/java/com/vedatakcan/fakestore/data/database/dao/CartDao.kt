@@ -7,6 +7,8 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import com.vedatakcan.fakestore.data.database.entities.CartItemEntity
+import com.vedatakcan.fakestore.domain.models.CartItem
+import com.vedatakcan.fakestore.domain.models.Product
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -32,6 +34,8 @@ interface CartDao {
     @Query("DELETE FROM cart_items")
     suspend fun deleteAll()
 
+    @Query("SELECT *FROM cart_items WHERE productId = :productId LIMIT 1")
+    suspend fun getCartItemByProductId(productId: Int): CartItemEntity?
 
 
 }

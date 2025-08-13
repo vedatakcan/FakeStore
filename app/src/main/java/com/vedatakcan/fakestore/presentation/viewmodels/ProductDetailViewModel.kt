@@ -54,7 +54,7 @@ class ProductDetailViewModel @Inject constructor(
     fun addToCart(product: Product){
         viewModelScope.launch {
             try {
-                cartRepository.insert(product.toCartItemEntity())
+                cartRepository.insert(product)
                 _eventFlow.emit(UiEvent.ShowSnackbar("Ürün Sepete Eklendi!"))
             }catch (e: Exception){
                 _eventFlow.emit(UiEvent.ShowSnackbar("Sepete eklenirken hata oluştu."))

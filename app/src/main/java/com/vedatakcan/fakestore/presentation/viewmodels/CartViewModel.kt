@@ -2,30 +2,58 @@ package com.vedatakcan.fakestore.presentation.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.vedatakcan.fakestore.data.database.entities.CartItemEntity
+import com.vedatakcan.fakestore.domain.models.CartItem
 import com.vedatakcan.fakestore.domain.repository.CartRepository
+import com.vedatakcan.fakestore.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class CartViewModel @Inject constructor(
     private val cartRepository: CartRepository
-) : ViewModel(){
+) : ViewModel() {
+
 
     // Sepette ürünlerin sayısını tutan Flow
     val cartItemCount: StateFlow<Int> = cartRepository.getAllCartItems()
         .map { resource ->
-            if (resource.data != null) {
-                resource.data.size
-            }else{
-                0
-            }
+            resource.data?.size ?: 0
         }.stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(5000),
             initialValue = 0
         )
+    // Sepette ürünlerin listesini tutan flow
+    val cartItems: StateFlow<Resource<List<CartItem>>> = cartRepository.getAllCartItems()
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5000),
+            initialValue = Resource.Loading()
+        )
+
+    // Sepetten ürün silme fonksiyonu
+    fun removeCartItem(cartItem: CartItem){
+        viewModelScope.launch {
+            cartRepository.delete(
+                CartItemEntity(
+                    localId = cartItem.id,
+                    productId = cartItem.product.id,
+                    title = cartItem.product.title,
+                    price = cartItem.product.price,
+                    description = cartItem.product.description,
+                    category = cartItem.product.category,
+                    imageUrl = cartItem.product.imageUrl,
+                    ratingRate = cartItem.product.rating.rate,
+                    ratingCount = cartItem.product.rating.count,
+                    quantity = cartItem.quantity
+                )
+            )
+        }
+    }
 }

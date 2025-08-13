@@ -15,9 +15,11 @@ import androidx.compose.foundation.magnifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
@@ -42,6 +44,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.vedatakcan.fakestore.presentation.components.CartBadgeIcon
+import com.vedatakcan.fakestore.presentation.screens.CartScreen
 import com.vedatakcan.fakestore.presentation.screens.HomeScreen
 import com.vedatakcan.fakestore.presentation.screens.ProductDetailScreen
 import com.vedatakcan.fakestore.presentation.ui.theme.FakeStoreTheme
@@ -107,9 +110,21 @@ fun AppNavigation() {
                             )
                         }
                     } else if (currentRoute?.startsWith("product_detail_screen") == true) {
-                        Text("ÜRÜN DETAY")
+                        Text("Ürün Detay")
+                    } else if (currentRoute == "cart_screen") {
+                        Text("Sepetim")
                     } else {
                         Text("Fake Store")
+                    }
+                },
+                navigationIcon = {
+                    if (currentRoute != "home_screen") {
+                        IconButton(onClick = {navController.popBackStack()}) {
+                            Icon(
+                                imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                                contentDescription = "Geri"
+                            )
+                        }
                     }
                 },
                 actions = {
@@ -140,6 +155,9 @@ fun AppNavigation() {
                 if (productId != null) {
                     ProductDetailScreen(productId = productId, navController = navController) // Parametreler eklendi
                 }
+            }
+            composable("cart_screen") {
+                CartScreen(navController = navController)
             }
         }
     }
