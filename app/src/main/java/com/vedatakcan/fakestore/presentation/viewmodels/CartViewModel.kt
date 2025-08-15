@@ -6,6 +6,7 @@ import com.vedatakcan.fakestore.data.database.entities.CartItemEntity
 import com.vedatakcan.fakestore.domain.models.CartItem
 import com.vedatakcan.fakestore.domain.repository.CartRepository
 import com.vedatakcan.fakestore.util.Resource
+import com.vedatakcan.fakestore.util.toCartItemEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -54,6 +55,25 @@ class CartViewModel @Inject constructor(
                     quantity = cartItem.quantity
                 )
             )
+        }
+    }
+
+    fun increaseQuantity(cartItem: CartItem) {
+        viewModelScope.launch {
+            val updateItem = cartItem.copy(quantity = cartItem.quantity +1)
+            cartRepository.update(updateItem.toCartItemEntity())
+        }
+    }
+
+    fun decreaseQuantity (cartItem: CartItem) {
+        viewModelScope.launch {
+            if (cartItem.quantity > 1) {
+                val updatedItem = cartItem.copy(quantity = cartItem.quantity -1)
+                cartRepository.update(updatedItem.toCartItemEntity())
+            } else {
+                // Miktar bir ise ürünü sepetten tamamen sil
+                cartRepository.delete(cartItem.toCartItemEntity())
+            }
         }
     }
 }

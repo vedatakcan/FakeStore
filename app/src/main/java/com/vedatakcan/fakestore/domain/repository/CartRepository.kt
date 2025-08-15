@@ -10,4 +10,6 @@ interface CartRepository {
     fun getAllCartItems(): Flow<Resource<List<CartItem>>>
     suspend fun insert(product: Product)
     suspend fun delete(cartItem: CartItemEntity)
+
+    suspend fun update(cartItem: CartItemEntity)
 }

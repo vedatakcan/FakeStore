@@ -10,6 +10,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AddCircle
+import androidx.compose.material.icons.filled.RemoveCircle
+
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -22,6 +25,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.LineHeightStyle
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -32,7 +36,9 @@ import com.vedatakcan.fakestore.domain.models.CartItem
 fun CartItemCard(
     cartItem: CartItem,
     onRemoveClick: () -> Unit,
-    onItemClick: () -> Unit
+    onItemClick: () -> Unit,
+    onIncreaseClick: () -> Unit,
+    onDecreaseClick: () -> Unit
 ){
     Card(
         modifier = Modifier
@@ -70,10 +76,20 @@ fun CartItemCard(
                     overflow = TextOverflow.Ellipsis
                 )
                 Spacer(modifier = Modifier.height(4.dp))
-                Text("${cartItem.quantity} Adet")
+
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    IconButton(onClick = onDecreaseClick) {
+                        Icon(Icons.Default.RemoveCircle, contentDescription = "Adet Azalt")
+                    }
+                    Text("${cartItem.quantity}")
+                    IconButton(onClick = onIncreaseClick) {
+                        Icon(Icons.Default.AddCircle, contentDescription = "Adet Arttır")
+                    }
+                }
+
                 Spacer(modifier = Modifier.height(4.dp))
                 Text(
-                    text = "%.2f Tl".format(cartItem.product.price*cartItem.quantity),
+                    text = "%.2f $".format(cartItem.product.price*cartItem.quantity),
                     fontSize = 16.sp
                 )
             }

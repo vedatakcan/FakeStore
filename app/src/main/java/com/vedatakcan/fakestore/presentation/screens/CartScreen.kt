@@ -74,7 +74,11 @@ fun CartScreen(
                                 onRemoveClick = {viewModel.removeCartItem(cartItem)},
                                 onItemClick = {
                                     navController.navigate("product_detail_screen/${cartItem.product.id}")
-                                }
+                                },
+
+                                // ViewModel daki fonksiyonları bağlıyoruz.
+                                onIncreaseClick = {viewModel.increaseQuantity(cartItem)},
+                                onDecreaseClick = {viewModel.decreaseQuantity(cartItem)}
 
                             )
                         }

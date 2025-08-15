@@ -95,6 +95,10 @@ dependencies {
     // -- Resim Yükleme (Coil) --
     implementation("io.coil-kt:coil-compose:2.7.0")
 
+    implementation("androidx.compose.material:material-icons-core:1.7.8")
+    // Tüm ikonları içeren kütüphane
+    implementation("androidx.compose.material:material-icons-extended:1.7.8")
+
     // -- Veritabanı (Room) --
     // En son kararlı versiyonlar.
     implementation("androidx.room:room-runtime:2.7.2")

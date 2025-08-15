@@ -164,7 +164,7 @@ fun ProductDetailContent(
         Spacer(modifier = Modifier.height(16.dp))
 
         Text(
-            text = "${product.price}",
+            text = "${product.price} $",
             style = MaterialTheme.typography.titleMedium,
             color = MaterialTheme.colorScheme.primary,
             modifier = Modifier.fillMaxWidth()

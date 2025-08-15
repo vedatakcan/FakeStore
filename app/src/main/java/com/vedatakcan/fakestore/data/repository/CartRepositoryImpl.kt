@@ -1,6 +1,5 @@
 package com.vedatakcan.fakestore.data.repository
 
-import androidx.compose.material3.darkColorScheme
 import com.vedatakcan.fakestore.data.database.dao.CartDao
 import com.vedatakcan.fakestore.data.database.entities.CartItemEntity
 import com.vedatakcan.fakestore.data.database.entities.toCartItem
@@ -56,5 +55,9 @@ class CartRepositoryImpl @Inject constructor(
 
     override suspend fun delete(cartItem: CartItemEntity) {
         cartDao.delete(cartItem)
+    }
+
+    override suspend fun update(cartItem: CartItemEntity) {
+        cartDao.update(cartItem)
     }
 }
